@@ -8,7 +8,7 @@ set -euo pipefail
 
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
-apt-get install -y ca-certificates curl git docker.io docker-compose-v2 cockpit
+apt-get install -y ca-certificates curl git docker.io docker-compose cockpit
 systemctl enable --now docker.service cockpit.socket systemd-timesyncd.service
 usermod -aG docker ampora
 
