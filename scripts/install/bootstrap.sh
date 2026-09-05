@@ -13,4 +13,4 @@ systemctl enable --now docker.service cockpit.socket systemd-timesyncd.service
 usermod -aG docker ampora
 
 echo 'Base instalada: Docker, Compose, Cockpit, Git, curl y NTP.'
-echo 'Tailscale y Promtail se habilitan mediante sus procedimientos versionados.'
+echo 'Tailscale y Grafana Alloy se habilitan mediante sus procedimientos versionados.'
