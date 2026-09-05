@@ -20,6 +20,12 @@ ensure_jump() {
   "$cmd" -C "$chain" -j "$target" >/dev/null 2>&1 || "$cmd" -I "$chain" 1 -j "$target"
 }
 
+ensure_user_rule() {
+  local cmd="$1"
+  shift
+  "$cmd" -C DOCKER-USER "$@" >/dev/null 2>&1 || "$cmd" -I DOCKER-USER 1 "$@"
+}
+
 "$iptables_cmd" -P INPUT DROP
 "$iptables_cmd" -P FORWARD DROP
 "$iptables_cmd" -P OUTPUT ACCEPT
@@ -32,8 +38,8 @@ ensure_rule "$iptables_cmd" INPUT -i lo -j ACCEPT
 ensure_rule "$iptables_cmd" INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 ensure_rule "$iptables_cmd" INPUT -p tcp -s 192.168.0.0/24 --dport 22 -j ACCEPT
 ensure_rule "$iptables_cmd" INPUT -p tcp -s 192.168.0.0/24 --dport 9090 -j ACCEPT
-ensure_rule "$iptables_cmd" DOCKER-USER -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
-ensure_rule "$iptables_cmd" DOCKER-USER -p tcp -s 192.168.0.23/32 --dport 9001 -j ACCEPT
+ensure_user_rule "$iptables_cmd" -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+ensure_user_rule "$iptables_cmd" -p tcp -s 192.168.0.23/32 --dport 9001 -j ACCEPT
 ensure_rule "$iptables_cmd" DOCKER-USER -j RETURN
 
 ensure_chain "$ip6tables_cmd" DOCKER-USER
