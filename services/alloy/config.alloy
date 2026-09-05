@@ -1,0 +1,21 @@
+logging {
+  level  = "info"
+  format = "logfmt"
+}
+
+discovery.docker "containers" {
+  host = "unix:///var/run/docker.sock"
+}
+
+loki.source.docker "containers" {
+  host       = "unix:///var/run/docker.sock"
+  targets    = discovery.docker.containers.targets
+  labels     = { job = "docker", node = "desktop-1" }
+  forward_to = [loki.write.home_labol.receiver]
+}
+
+loki.write "home_labol" {
+  endpoint {
+    url = "http://192.168.0.24:3100/loki/api/v1/push"
+  }
+}
