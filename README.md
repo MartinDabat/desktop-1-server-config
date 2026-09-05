@@ -14,13 +14,24 @@ HomeLab.
 - Observabilidad prevista: Grafana Alloy hacia Loki
 - Administración Docker: Portainer Agent administrado desde MSI
 
-## Estructura
+## Objetivos
+
+- Documentar completamente el nodo Desktop 1.
+- Versionar la configuración del host y sus servicios.
+- Auditar el estado real antes de modificarlo.
+- Preparar el nodo para ML, LLM pequeño y transcripción local.
+- Mantener datos y secretos separados de Git.
+- Registrar decisiones permanentes mediante ADR.
+- Mantener el mismo contrato operativo que MSI, Lenovo y HP.
+
+## Estructura del repositorio
 
 ```text
-docs/       arquitectura, auditorías, ADR y operación
+docs/       arquitectura, hardware, red, auditorías, ADR y operación
 scripts/    auditoría, instalación, backup, deploy y mantenimiento
 services/   servicios del nodo
-system/     base, Docker, red, SSH, energía, Tailscale y NTP
+system/     base, Docker, red, SSH, firewall, energía y Tailscale
+scripts-desktop-1/ herramientas desde la Mac
 ```
 
 El proyecto de analítica de WhatsApp se coordina en

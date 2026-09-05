@@ -1,0 +1,12 @@
+[Unit]
+Description=Desktop 1 firewall policy
+Wants=network-online.target docker.service tailscaled.service
+After=network-online.target docker.service tailscaled.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/desktop-1-firewall-apply
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
