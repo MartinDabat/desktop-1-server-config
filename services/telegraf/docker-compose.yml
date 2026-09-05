@@ -1,0 +1,40 @@
+name: telegraf
+
+networks:
+  metrics:
+    external: true
+
+services:
+  docker-proxy:
+    image: tecnativa/docker-socket-proxy@sha256:44538370af9103858aa387860f355bed72e7f4e15380ef829b53ed4e154cedcd
+    container_name: desktop-1-docker-proxy
+    restart: unless-stopped
+    networks: [metrics]
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - CONTAINERS=1
+      - INFO=1
+      - VERSION=1
+      - EVENTS=1
+
+  telegraf:
+    image: telegraf@sha256:a05b4b4ce2678bfc94e6ccfcbaebc4ce1d30906c1d93ee6595522e5519dc31a6
+    container_name: desktop-1-telegraf
+    restart: unless-stopped
+    networks: [metrics]
+    env_file:
+      - ${TELEGRAF_ENV_FILE:-/etc/desktop-1-server-config/secrets/telegraf.env}
+    environment:
+      - HOST_ETC=/hostfs/etc
+      - HOST_PROC=/hostfs/proc
+      - HOST_SYS=/hostfs/sys
+      - HOST_VAR=/hostfs/var
+      - HOST_RUN=/hostfs/run
+      - HOST_MOUNT_PREFIX=/hostfs
+    volumes:
+      - /:/hostfs:ro
+      - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    pid: host
+    depends_on:
+      - docker-proxy
