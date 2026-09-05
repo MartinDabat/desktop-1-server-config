@@ -1,5 +1,6 @@
-# Promtail
+# Promtail (no instalar)
 
-Promtail se ejecutará como contenedor cuando exista un endpoint Loki aprobado
-y una configuración sanitizada. No se despliega ni se registran credenciales
-hasta definir el contrato de observabilidad con el HomeLab.
+Promtail no se instalará en Desktop 1: Grafana lo declaró fuera de soporte el
+2 de marzo de 2026. El reemplazo previsto es Grafana Alloy, documentado en
+`services/alloy/`. Esta carpeta se conserva sólo como referencia de la
+diferencia con los nodos existentes.

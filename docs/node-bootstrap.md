@@ -16,6 +16,7 @@ bootstrap.
 
 ## Base prevista
 
-Instalar y verificar Git, Docker Engine/Compose, Cockpit, Promtail y
-Tailscale. El acceso remoto y los servicios publicados se auditarán antes de
+Instalar y verificar Git, Docker Engine/Compose, Cockpit, Grafana Alloy y
+Tailscale. Alloy reemplaza a Promtail, que quedó fuera de soporte en marzo de
+2026. El acceso remoto y los servicios publicados se auditarán antes de
 asignar cargas de ML o LLM.
