@@ -27,11 +27,53 @@ HomeLab.
 ## Estructura del repositorio
 
 ```text
-docs/       arquitectura, hardware, red, auditorías, ADR y operación
-scripts/    auditoría, instalación, backup, deploy y mantenimiento
-services/   servicios del nodo
-system/     base, Docker, red, SSH, firewall, energía y Tailscale
-scripts-desktop-1/ herramientas desde la Mac
+.
+├── docs/
+│   ├── adr/
+│   ├── audits/
+│   ├── architecture.md
+│   ├── hardware.md
+│   ├── network.md
+│   ├── operations.md
+│   ├── rebuild-desktop-1.md
+│   ├── recovery.md
+│   ├── reconstruction-inventory.md
+│   ├── reconstruction-matrix-current.md
+│   ├── reconstruction-status.md
+│   ├── security.md
+│   └── services.md
+│
+├── services/
+│   ├── README.md
+│   ├── alloy/
+│   ├── cockpit/
+│   ├── portainer-agent/
+│   ├── promtail/
+│   └── telegraf/
+│
+├── system/
+│   ├── README.md
+│   ├── base/
+│   ├── docker/
+│   ├── firewall/
+│   ├── network/
+│   ├── power/
+│   ├── ssh/
+│   ├── tailscale/
+│   └── timesyncd/
+│
+├── scripts/
+│   ├── README.md
+│   ├── audit/
+│   ├── backup/
+│   ├── deploy/
+│   ├── install/
+│   └── maintenance/
+│
+├── scripts-desktop-1/
+├── AGENTS.md
+├── README.md
+└── .gitignore
 ```
 
 El proyecto de analítica de WhatsApp se coordina en
