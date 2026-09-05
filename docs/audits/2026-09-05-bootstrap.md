@@ -16,6 +16,16 @@ IP Tailscale: `100.76.55.17`
 - Tailscale `1.102.3` instalado, `tailscaled` activo y nodo autenticado.
 - Grafana Alloy `v1.19.0` activo como `desktop-1-alloy`.
 - Loki de Lenovo responde `ready` en `192.168.0.24:3100`.
+- Alloy publica logs con las etiquetas `job=docker`, `node=desktop-1` y
+  `host=dsk-1-debian`; la serie fue verificada en Loki después de recrear el
+  contenedor.
+- Telegraf está activo como `desktop-1-telegraf`, con proxy Docker limitado,
+  y publica métricas del host a InfluxDB de Lenovo (`192.168.0.24:8086`).
+- Portainer Agent está activo como `portainer_agent`, con HTTPS en TCP 9001;
+  queda pendiente registrarlo como endpoint en la instancia central de
+  Portainer.
+- Grafana central tiene dashboards fijos de infraestructura y logs para
+  Desktop 1, además de las vistas dinámicas del HomeLab.
 - No se montó ni formateó el segundo disco (`/dev/sda`).
 - No se desplegaron ML, LLM, transcripción, n8n ni WhatsApp.
 
@@ -31,6 +41,7 @@ repositorio remoto es
 - definir y aplicar firewall después de la auditoría de red y acceso remoto;
 - decidir zona horaria común y verificar timers;
 - definir límites de Docker antes de cargas de ML/LLM;
-- confirmar retención y etiquetas de Alloy/Loki;
+- confirmar retención de Alloy/Loki y registrar el endpoint de Desktop 1 en
+  Portainer central;
 - incorporar auditoría automatizada del nodo;
 - seleccionar runtime y modelos para el proyecto WhatsApp.
