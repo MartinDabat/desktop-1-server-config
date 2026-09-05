@@ -12,6 +12,7 @@ HomeLab.
 - `/srv`: partición separada en el disco del sistema
 - Rol previsto: análisis local, ML, LLM y transcripción
 - Observabilidad prevista: Grafana Alloy hacia Loki
+- Administración Docker: Portainer Agent administrado desde MSI
 
 ## Estructura
 
