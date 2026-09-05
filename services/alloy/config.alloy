@@ -10,7 +10,7 @@ discovery.docker "containers" {
 loki.source.docker "containers" {
   host       = "unix:///var/run/docker.sock"
   targets    = discovery.docker.containers.targets
-  labels     = { job = "docker", node = "desktop-1" }
+  labels     = { job = "docker", host = "dsk-1-debian", node = "desktop-1" }
   forward_to = [loki.write.home_labol.receiver]
 }
 
