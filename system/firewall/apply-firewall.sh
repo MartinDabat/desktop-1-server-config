@@ -23,7 +23,10 @@ ensure_jump() {
 ensure_user_rule() {
   local cmd="$1"
   shift
-  "$cmd" -C DOCKER-USER "$@" >/dev/null 2>&1 || "$cmd" -I DOCKER-USER 1 "$@"
+  while "$cmd" -C DOCKER-USER "$@" >/dev/null 2>&1; do
+    "$cmd" -D DOCKER-USER "$@"
+  done
+  "$cmd" -I DOCKER-USER 1 "$@"
 }
 
 "$iptables_cmd" -P INPUT DROP
