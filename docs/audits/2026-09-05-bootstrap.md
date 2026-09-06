@@ -1,6 +1,6 @@
 # Auditoría de bootstrap — Desktop 1
 
-Fecha: 2026-09-05  
+Fecha: 2026-09-05 (verificación remota final)
 Nodo: `dsk-1-debian`  
 IP LAN: `192.168.0.25`  
 IP Tailscale: `100.76.55.17`
@@ -26,22 +26,34 @@ IP Tailscale: `100.76.55.17`
   Portainer.
 - Grafana central tiene dashboards fijos de infraestructura y logs para
   Desktop 1, además de las vistas dinámicas del HomeLab.
-- No se montó ni formateó el segundo disco (`/dev/sda`).
-- No se desplegaron ML, LLM, transcripción, n8n ni WhatsApp.
+- El segundo disco (`/dev/sda`) no está montado ni fue formateado durante el
+  bootstrap; sus particiones y filesystems existentes fueron preservados.
+- Firewall IPv4/IPv6 aplicado y persistente: `INPUT DROP`, `FORWARD DROP`,
+  `OUTPUT ACCEPT`; las cadenas de Docker y Tailscale están activas.
+- No se desplegaron ML, LLM, transcripción, n8n ni WhatsApp; quedan fuera del
+  alcance de la incorporación base.
 
 ## Configuración versionada
 
-El checkout operativo está en `/home/ampora/git/desktop-1-server-config` y
-fue actualizado mediante `git pull` hasta el commit del bootstrap. El
+El checkout operativo está en `/home/ampora/git/desktop-1-server-config`.
+Durante esta verificación permanece en `d65089d` porque Desktop 1 no pudo
+resolver GitHub por DNS. El aplicador final del firewall está instalado en
+`/usr/local/sbin/desktop-1-firewall-apply` y la política activa fue verificada.
+El checkout debe actualizarse con `git pull --ff-only` cuando se restablezca
+la resolución de GitHub. El
 repositorio remoto es
 [`MartinDabat/desktop-1-server-config`](https://github.com/MartinDabat/desktop-1-server-config).
 
 ## Pendientes explícitos
 
-- definir y aplicar firewall después de la auditoría de red y acceso remoto;
 - decidir zona horaria común y verificar timers;
 - definir límites de Docker antes de cargas de ML/LLM;
-- confirmar retención de Alloy/Loki y registrar el endpoint de Desktop 1 en
-  Portainer central;
+- confirmar retención de Alloy/Loki;
 - incorporar auditoría automatizada del nodo;
 - seleccionar runtime y modelos para el proyecto WhatsApp.
+
+## Resultado de la incorporación
+
+La incorporación base al HomeLab está completada. La tarea MSI #24 puede
+cerrarse como completada, dejando como trabajo posterior sólo los pendientes
+funcionales indicados arriba.
